@@ -77,6 +77,7 @@ class AdminSettingsController {
     _getSettings() {
         const settings = this._settingsStore.getSettings();
         const googleData = angular.copy(settings.authentication && settings.authentication.google_oauth || {});
+        const samlData = angular.copy(settings.authentication && settings.authentication.saml || {});
         const passwordData = angular.copy(settings.authentication && settings.authentication.password || {});
 
         this._settings = angular.copy(settings);
@@ -86,11 +87,21 @@ class AdminSettingsController {
         this.auth = {
             google: settings.authentication && hasValues(googleData),
             google_data: googleData,
+            saml: settings.authentication && hasValues(samlData),
+            saml_data: samlData,
             github: false,
             password: settings.authentication && hasValues(passwordData),
             password_data: passwordData,
             ldap: false
         };
+
+        if (this.auth.google && hasValues(this.auth.google_data)) {
+            this.auth_sso = 'google';
+        } else if (this.auth.saml && hasValues(this.auth.saml_data)) {
+            this.auth_sso = 'saml';
+        } else {
+            this.auth_sso = 'off';
+        }
 
         this.gitChartRepo = _.get(this._settings, 'charts.repo_url');
 
@@ -115,10 +126,19 @@ class AdminSettingsController {
 
             _.set(this._settings, 'charts.repo_url', this.gitChartRepo);
 
+            this.auth.google = this.auth_sso === 'google';
+            this.auth.saml = this.auth_sso === 'saml';
+
             if (this.auth.google && hasValues(this.auth.google_data)) {
                 this._settings.authentication.google_oauth = this.auth.google_data;
             } else {
                 delete this._settings.authentication.google_oauth;
+            }
+
+            if (this.auth.saml && hasValues(this.auth.saml_data)) {
+                this._settings.authentication.saml = this.auth.saml_data;
+            } else {
+                delete this._settings.authentication.saml;
             }
 
             if (this.auth.password && hasValues(this.auth.password_data)) {
@@ -145,12 +165,16 @@ class AdminSettingsController {
 
     isAuthDisabled(name) {
         const enabled = _.chain(this.auth)
-            .pick(['google', 'github', 'password', 'ldap'])
+            .pick(['google', 'saml', 'github', 'password', 'ldap'])
             .values()
             .reduce((counter, x) => x ? counter + 1 : counter, 0)
             .value();
 
         return this.auth[name] && enabled === 1;
+    }
+
+    isSsoOffDisabled() {
+        return !(this.auth.password && hasValues(this.auth.password_data));
     }
 
     removeAdmin(admin) {

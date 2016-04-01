@@ -15,9 +15,11 @@ limitations under the License.
 */
 
 import GOOGLE_G_LOGO from 'images/google-g-logo.svg';
+import SAML_LOGO from 'images/icon-saml.svg';
 
 const icons = {
-    GOOGLE_G_LOGO
+    GOOGLE_G_LOGO,
+    SAML_LOGO
 };
 
 export default icons;

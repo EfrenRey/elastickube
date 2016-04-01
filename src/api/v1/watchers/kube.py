@@ -437,7 +437,7 @@ class KubeWatcher(object):
                 raise Return(False)
 
             namespace = yield Query(self.settings["database"], "Namespaces").find_one({"name": document["namespace"]})
-            if self.user["username"] not in namespace["members"]:
+            if "members" in namespace and self.user["username"] not in namespace["members"]:
                 raise Return(False)
 
         raise Return(True)
