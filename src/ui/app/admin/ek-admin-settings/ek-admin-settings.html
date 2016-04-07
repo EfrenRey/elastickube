@@ -57,7 +57,7 @@
                                      value="google"></md-radio-button>
                     <div layout="row" layout-align="start center">
                         <img class="ek-admin-settings__authentication__icon" ng-src="{{:: icons.GOOGLE_G_LOGO }}">
-                        <span>Google</span>
+                        <span>Google OpenID</span>
                     </div>
                 </div>
                 <div class="ek-admin-settings__authentication__methods__configuration" ng-if="ctrl.auth_sso === 'google'">
@@ -121,16 +121,7 @@
                     <textarea class="ek-admin-settings__textarea ek-admin-settings__textarea--long ek-input"
                               ng-model="ctrl.auth.saml_data.sp_key" cols='80'></textarea>
                 </div>
-                <md-divider></md-divider>
-
             </md-radio-group>
-    
-            <div class="ek-admin-settings__authentication__methods__password" ng-if="ctrl.auth.password">
-                <div class="ek-admin-settings__subtitle ek-admin-settings__subtitle--required">Password Regex</div>
-                <input type="text" class="ek-admin-settings__input ek-admin-settings__input--long ek-input"
-                       ng-model="ctrl.auth.password_data.regex" required>
-            </div>
-
         </div>
     </div>
 
