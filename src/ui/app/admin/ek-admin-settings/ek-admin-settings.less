@@ -19,7 +19,7 @@
     &__authentication,
     &__mail {
         margin-top: 30px;
-        padding: 30px 30px 40px 30px;
+        padding: 30px;
         width: 600px;
         border: 1px solid @grey300;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.08);
@@ -35,6 +35,24 @@
             height: 20px;
             margin-right: 10px;
         }
+        &__methods {
+            &__method {
+                padding: 15px 0;
+
+                .ek-radio-button {
+                    margin: 0 5px 0 0;
+                }
+            }
+            &__configuration {
+                padding: 0 0 20px 36px;
+            }
+            md-divider {
+                border-top-color: @grey300;
+            }
+            &__password {
+                margin-top: 20px;
+            }
+        }
     }
 
     &__admins {
@@ -43,6 +61,7 @@
             border-top: 0;
             max-height: 210px;
             overflow-y: auto;
+            margin-bottom: 10px;
 
             &__admin {
                 padding: 0 10px;
@@ -64,7 +83,7 @@
 
     &__title {
         margin: 0;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         text-transform: capitalize;
         font-size: 20px;
         font-weight: 500;
@@ -72,6 +91,7 @@
 
     &__subtitle {
         font-weight: 500;
+        padding-top: 8px;
 
         &--required {
             &:after {
@@ -82,7 +102,7 @@
     }
 
     &__input {
-        margin: 16px 0;
+        margin: 8px 0;
         padding: 10px;
         height: 30px;
 
@@ -96,7 +116,7 @@
     }
 
     &__textarea {
-        margin: 16px 0;
+        margin: 8px 0;
         padding: 10px;
         height: 100px;
         max-height: 100px;

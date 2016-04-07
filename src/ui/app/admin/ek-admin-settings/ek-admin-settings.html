@@ -36,31 +36,31 @@
         <h4 class="ek-admin-settings__title">authentication</h4>
 
         <div class="ek-admin-settings__authentication__methods">
-            <span class="ek-admin-settings__subtitle">Enable Single Sign On</span>
+            <span class="ek-admin-settings__subtitle">Single Sign On</span>
             <md-radio-group ng-model="ctrl.auth_sso">
 
-                <div class="ek-admin-settings__authentication__methods__google"
-                    layout="row" layout-align="space-between center">
-                    <div layout="row" layout-align="start center">
-                        <span>Off</span>
-                    </div>
-                    <md-radio-button class="md-primary" aria-label="Switch Off"
+                <div class="ek-admin-settings__authentication__methods__method"
+                    layout="row" layout-align="start center">
+                    <md-radio-button class="md-primary ek-radio-button" aria-label="Switch Off"
                                      value="off"
                                      ng-disabled="ctrl.isSsoOffDisabled()">
                     </md-radio-button>
+                    <div layout="row" layout-align="start center">
+                        <span>Off</span>
+                    </div>
                 </div>
                 <md-divider></md-divider>
 
-                <div class="ek-admin-settings__authentication__methods__google"
-                    layout="row" layout-align="space-between center">
+                <div class="ek-admin-settings__authentication__methods__method"
+                    layout="row" layout-align="start center">
+                    <md-radio-button class="md-primary ek-radio-button" aria-label="Switch Google authentication"
+                                     value="google"></md-radio-button>
                     <div layout="row" layout-align="start center">
                         <img class="ek-admin-settings__authentication__icon" ng-src="{{:: icons.GOOGLE_G_LOGO }}">
                         <span>Google</span>
                     </div>
-                    <md-radio-button class="md-primary" aria-label="Switch Google authentication"
-                                     value="google"></md-radio-button>
                 </div>
-                <div ng-if="ctrl.auth_sso === 'google'">
+                <div class="ek-admin-settings__authentication__methods__configuration" ng-if="ctrl.auth_sso === 'google'">
                     <div class="ek-admin-settings__subtitle ek-admin-settings__subtitle--required">Key</div>
                     <input type="text" class="ek-admin-settings__input ek-admin-settings__input--long ek-input"
                         ng-model="ctrl.auth.google_data.key" required>
@@ -75,16 +75,16 @@
                 </div>
                 <md-divider></md-divider>
 
-                <div class="ek-admin-settings__authentication__methods__saml"
-                    layout="row" layout-align="space-between center">
+                <div class="ek-admin-settings__authentication__methods__method"
+                    layout="row" layout-align="start center">
+                    <md-radio-button class="md-primary ek-radio-button" aria-label="Switch SAML 2.0 authentication"
+                                     value="saml"></md-radio-button>
                     <div layout="row" layout-align="start center">
                         <img class="ek-admin-settings__authentication__icon" ng-src="{{:: icons.SAML_LOGO }}">
                         <span>SAML 2.0</span>
                     </div>
-                    <md-radio-button class="md-primary" aria-label="Switch SAML 2.0 authentication"
-                                     value="saml"></md-radio-button>
                 </div>
-                <div ng-if="ctrl.auth_sso === 'saml'">
+                <div class="ek-admin-settings__authentication__methods__configuration" ng-if="ctrl.auth_sso === 'saml'">
                     <div class="ek-admin-settings__subtitle ek-admin-settings__subtitle--required">Identity Provider Metadata URI</div>
                     <input type="text" class="ek-admin-settings__input ek-admin-settings__input--long ek-input"
                         ng-model="ctrl.auth.saml_data.metadata_uri" required>
@@ -125,19 +125,7 @@
 
             </md-radio-group>
     
-            <div class="ek-admin-settings__authentication__methods__password"
-                 layout="row" layout-align="space-between center">
-                <div layout="row" layout-align="start center">
-                    <md-icon class="ek-admin-settings__authentication__icon ek-admin-settings__authentication__icon__password"
-                             md-svg-icon="{{:: icons.IC_PERSON_48PX }}"></md-icon>
-                    <span>Username & Password</span>
-                </div>
-
-                <md-switch class="md-primary" aria-label="Switch Username and Pasword authentication"
-                           ng-model="ctrl.auth.password"
-                           ng-disabled="ctrl.isAuthDisabled('password')"></md-switch>
-            </div>
-            <div ng-if="ctrl.auth.password">
+            <div class="ek-admin-settings__authentication__methods__password" ng-if="ctrl.auth.password">
                 <div class="ek-admin-settings__subtitle ek-admin-settings__subtitle--required">Password Regex</div>
                 <input type="text" class="ek-admin-settings__input ek-admin-settings__input--long ek-input"
                        ng-model="ctrl.auth.password_data.regex" required>
